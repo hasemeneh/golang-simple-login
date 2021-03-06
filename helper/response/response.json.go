@@ -13,7 +13,7 @@ type JsonResponse struct {
 type JsonBody struct {
 	*ResponseError
 	Message string      `json:"message,omitempty"`
-	Data    interface{} `json:"latency,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 func NewJsonResponse() *JsonResponse {
@@ -49,10 +49,13 @@ func (r *JsonResponse) WriteResponse(w http.ResponseWriter) {
 	b, err := json.Marshal(r.JsonBody)
 	if err != nil {
 		jsonBody := JsonBody{
-			ResponseError: NewResponseError(err.Error(), 500),
+			ResponseError: NewResponseError(err.Error(), http.StatusInternalServerError),
 		}
 		b, _ = json.Marshal(jsonBody)
 	}
 	r.Body = b
+	if r.JsonBody.ResponseError != nil {
+		r.StatusCode = r.JsonBody.ErrorCode
+	}
 	r.BasicResponse.WriteResponse(w)
 }

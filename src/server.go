@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	serviceObj := service.Service{}
-	web := handler.NewWebHandler(serviceObj)
+	web := handler.NewWebHandler(service.New())
 	web.Run()
+
 }
