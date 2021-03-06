@@ -18,8 +18,8 @@ func (p *Public) Login(r *http.Request) response.HttpResponse {
 
 	token, err := p.Service.UserUsecase.Login(r.Context(), request.Username, request.PlainPassword)
 	if err != nil {
-		if err == constants.ErrEmailAlreadyRegistered || err == constants.ErrUsernameAlreadyUsed {
-			return response.NewJsonResponse().SetError(response.NewResponseError(err.Error(), http.StatusBadRequest))
+		if err == constants.ErrWrongPassword {
+			return response.NewJsonResponse().SetError(response.NewResponseError(err.Error(), http.StatusUnauthorized))
 		}
 		return response.NewJsonResponse().SetError(response.NewResponseError(err.Error(), http.StatusInternalServerError))
 	}

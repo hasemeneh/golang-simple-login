@@ -32,6 +32,8 @@ func (w *WebHandler) Register() {
 	apiHttpHandlers.GET("/user", apiHandlers.HandleGetUserInfo)
 	apiHttpHandlers.POST("/register", apiHandlers.Register)
 	apiHttpHandlers.POST("/login", apiHandlers.Login)
+	apiHttpHandlers.POST("/address", apiHandlers.HandleUpdateAddress)
+	apiHttpHandlers.POST("/change_password", apiHandlers.HandleUpdatePassword)
 }
 
 func (w *WebHandler) Run() {

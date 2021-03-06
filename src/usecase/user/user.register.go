@@ -6,28 +6,12 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"fmt"
-	"strconv"
 	"time"
 
-	"github.com/hasemeneh/golang-simple-login/helper/redis"
 	"github.com/hasemeneh/golang-simple-login/src/constants"
 	"github.com/hasemeneh/golang-simple-login/src/models"
-	"github.com/hasemeneh/golang-simple-login/src/repositories"
 	"golang.org/x/crypto/bcrypt"
 )
-
-type userUsecase struct {
-	User  repositories.UserDoman
-	Redis redis.RedisInterface
-}
-
-func New(user repositories.UserDoman, Redis redis.RedisInterface) *userUsecase {
-
-	return &userUsecase{
-		User:  user,
-		Redis: Redis,
-	}
-}
 
 func (u *userUsecase) Register(ctx context.Context, user *models.UserModel) error {
 	_, err := u.User.GetUserByEmail(ctx, user.Email)
@@ -83,27 +67,4 @@ func generateToken(userID int64) string {
 	h.Write([]byte(fmt.Sprintf("%d", userID)))
 	h.Write([]byte(time.Now().Format(time.RFC3339Nano)))
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
-}
-
-func (u *userUsecase) GetUserInfoByToken(ctx context.Context, token string) (*models.UserModel, error) {
-	isExist, err := u.Redis.Exist(fmt.Sprintf(constants.SessionToken, token))
-	if err != nil {
-		return nil, err
-	}
-	if !isExist {
-		return nil, constants.ErrInvalidToken
-	}
-	UserIDString, err := u.Redis.Get(fmt.Sprintf(constants.SessionToken, token))
-	if err != nil {
-		return nil, err
-	}
-	userID, err := strconv.ParseInt(UserIDString, 10, 64)
-	if err != nil {
-		return nil, err
-	}
-	userData, err := u.User.GetUserByID(ctx, userID)
-	if err != nil {
-		return nil, err
-	}
-	return userData, nil
 }

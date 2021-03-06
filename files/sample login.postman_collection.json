@@ -108,6 +108,76 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Update Address",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer LhncPYvCaVBfp2TrjW3hHc/t/cygvm7clh7Suf21hqs=",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\": \"jl. Kosar Baru no.99\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:33339/api/address",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "33339",
+					"path": [
+						"api",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer LhncPYvCaVBfp2TrjW3hHc/t/cygvm7clh7Suf21hqs="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:33339/api/change_password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "33339",
+					"path": [
+						"api",
+						"change_password"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

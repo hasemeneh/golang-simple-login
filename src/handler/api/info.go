@@ -18,8 +18,8 @@ func (p *Public) HandleGetUserInfo(r *http.Request) response.HttpResponse {
 
 	resp, err := p.Service.UserUsecase.GetUserInfoByToken(r.Context(), token)
 	if err != nil {
-		if err == constants.ErrEmailAlreadyRegistered || err == constants.ErrUsernameAlreadyUsed {
-			return response.NewJsonResponse().SetError(response.NewResponseError(err.Error(), http.StatusBadRequest))
+		if err == constants.ErrInvalidToken {
+			return response.NewJsonResponse().SetError(response.NewResponseError(err.Error(), http.StatusUnauthorized))
 		}
 		return response.NewJsonResponse().SetError(response.NewResponseError(err.Error(), http.StatusInternalServerError))
 	}
