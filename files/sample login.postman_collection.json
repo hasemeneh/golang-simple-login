@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "2cfa62ae-dc7e-436b-b0a2-0fe2e8704d96",
+		"name": "sample login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:33339/api/ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:33339/api/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "33339",
+					"path": [
+						"api",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"a@c.com\",\n    \"username\":\"username\",\n    \"address\":\"jl. Kosar Baru no.3\",\n    \"password\":\"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:33339/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "33339",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"username\",\n    \"password\":\"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:33339/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "33339",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer LhncPYvCaVBfp2TrjW3hHc/t/cygvm7clh7Suf21hqs=",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:33339/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "33339",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
